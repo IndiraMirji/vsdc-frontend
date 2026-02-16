@@ -10,9 +10,14 @@ const Dashboard = () => {
   const [summary, setSummary] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
+ useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (token) {
     fetchTodaySummary();
-  }, []);
+  } else {
+    navigate("/login"); // Redirect to login if no token found
+  }
+}, []);
 
   const fetchTodaySummary = async () => {
 

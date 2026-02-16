@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "./DashBoard.css";
+import api from "../api";
 
 const Dashboard = () => {
   const [summary, setSummary] = useState(null);
@@ -17,7 +18,7 @@ const Dashboard = () => {
 
   
   try {
-    const response = await axios.get("http://localhost:8080/api/attendance/today/summary");
+    const response = await api.get("/api/attendance/today/summary");
     setSummary(response.data);
     toast.success("DashBoard updated");
   } catch (error) {

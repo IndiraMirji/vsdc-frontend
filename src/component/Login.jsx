@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import "./Login.css";
+import api from "../api";
 
 const Login = () => {
   const [authMode, setAuthMode] = useState('login');
@@ -24,10 +25,10 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:8080/api/auth/login', {
-        username: loginForm.username,
-        password: loginForm.password
-      });
+    const res = await api.post('/api/auth/login', { // Updated
+      username: loginForm.username,
+      password: loginForm.password
+    });
 
       // Save token and user
       localStorage.setItem('token', res.data.token);
@@ -67,12 +68,12 @@ const Login = () => {
 
     setLoading(true);
 
-    try {
-      await axios.post('http://localhost:8080/api/auth/register', {
-        username: registerForm.username,
-        password: registerForm.password,
-        role: registerForm.role
-      });
+   try {
+    await api.post('/api/auth/register', { // Updated
+      username: registerForm.username,
+      password: registerForm.password,
+      role: registerForm.role
+    });
 
       toast.success('Account created! Please login.');
       setRegisterForm({ username: '', password: '', confirmPassword: '', role: 'staff' });

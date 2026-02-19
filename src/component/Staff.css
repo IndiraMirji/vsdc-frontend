@@ -1,0 +1,343 @@
+/* Staff.css - Professional Staff Management Styling */
+
+:root {
+  --primary: #667eea;
+  --primary-dark: #764ba2;
+  --success: #4caf50;
+  --warning: #ff9800;
+  --danger: #f44336;
+  --info: #2196f3;
+  --bg-gray: #f5f7fa;
+  --white: #ffffff;
+  --text-dark: #333333;
+  --text-gray: #666666;
+  --text-light: #888888;
+  --border: #f0f0f0;
+}
+
+/* Main Container */
+.staff-container {
+  padding: 30px;
+  max-width: 1600px;
+  margin: 0 auto;
+  background-color: var(--bg-gray);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.staff-container h2 {
+  font-size: 32px;
+  color: var(--text-dark);
+  margin: 0 0 30px 0;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.staff-container h3 {
+  font-size: 22px;
+  color: var(--text-dark);
+  margin: 30px 0 20px 0;
+  font-weight: 600;
+}
+
+.staff-container hr {
+  border: none;
+  border-top: 2px solid var(--border);
+  margin: 40px 0;
+}
+
+/* Table Styling */
+.staff-table {
+  width: 100%;
+  background: var(--white);
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.staff-table thead {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+}
+
+.staff-table th {
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.staff-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.staff-table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.staff-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.staff-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Action Buttons in Table */
+.staff-table td button {
+  padding: 6px 12px;
+  margin-right: 6px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-edit {
+  background: #e3f2fd;
+  color: var(--info);
+}
+
+.btn-edit:hover {
+  background: var(--info);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.btn-sunday {
+  background: #fff3e0;
+  color: var(--warning);
+}
+
+.btn-sunday:hover {
+  background: var(--warning);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.btn-delete {
+  background: #ffebee;
+  color: var(--danger);
+}
+
+.btn-delete:hover {
+  background: var(--danger);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.btn-att {
+  background: #e8f5e9;
+  color: var(--success);
+}
+
+.btn-att:hover {
+  background: var(--success);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+/* Form Styling */
+.staff-form {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"] {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+/* Form Buttons */
+.form-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-submit {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.form-buttons button[type="button"] {
+  padding: 14px 28px;
+  background: #f0f0f0;
+  color: var(--text-dark);
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.form-buttons button[type="button"]:hover {
+  background: #e0e0e0;
+}
+
+/* Empty State */
+.staff-table tbody:empty::after {
+  content: "No staff members found";
+  display: block;
+  text-align: center;
+  padding: 40px;
+  color: #999;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .staff-table {
+    overflow-x: auto;
+    display: block;
+  }
+
+  .staff-table thead,
+  .staff-table tbody,
+  .staff-table tr,
+  .staff-table th,
+  .staff-table td {
+    display: block;
+  }
+
+  .staff-table thead {
+    display: none;
+  }
+
+  .staff-table tr {
+    margin-bottom: 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px;
+    background: white;
+  }
+
+  .staff-table td {
+    border: none;
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .staff-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-gray);
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  .staff-table td button {
+    margin: 4px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .staff-container {
+    padding: 20px;
+  }
+
+  .staff-container h2 {
+    font-size: 24px;
+  }
+
+  .staff-form {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .form-buttons button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-table td button {
+    width: 100%;
+    margin: 4px 0;
+  }
+}

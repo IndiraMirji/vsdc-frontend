@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "./DashBoard.css";
@@ -8,42 +7,47 @@ import api from "../api";
 
 const Dashboard = () => {
   const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
- useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    fetchTodaySummary();
-  } else {
-    navigate("/login"); // Redirect to login if no token found
-  }
-}, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    } else {
+      fetchTodaySummary();
+    }
+  }, [navigate]);
 
   const fetchTodaySummary = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get("/attendance/today/summary");
+      setSummary(response.data);
+    } catch (error) {
+      console.error("Fetch failed", error);
+      toast.error("Could not update dashboard");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  
-  try {
-    const response = await api.get("/api/attendance/today/summary");
-    setSummary(response.data);
-    toast.success("DashBoard updated");
-  } catch (error) {
-    console.error("Fetch failed", error);
-  }
-};
+  if (loading) return <div className="loading">Loading Dashboard...</div>;
 
-return (
-    <div className="dashboard-container"> {/* Parent container */}
+  return (
+    <div className="dashboard-container">
+      {/* Header with Title and Add Staff Button */}
       <header className="dashboard-header">
         <div>
           <h1>🏥 Vijayapur Scanning Centre</h1>
           <p className="date-display">{moment().format("dddd, MMMM DD, YYYY")}</p>
         </div>
-        <div className="dashboard-footer" style={{marginTop: 0}}>
-           <button className="nav-btn1" onClick={() => navigate("/staff")}>+ Add Staff</button>
-        </div>
+        <button className="nav-btn1" onClick={() => navigate("/staff")}>
+          + Add Staff
+        </button>
       </header>
 
-      {/* Grid for the Stats Cards */}
+      {/* Statistics Section */}
       <div className="stats-grid">
         <div className="stat-card present">
           <h3>Present</h3>
@@ -65,35 +69,32 @@ return (
 
       <hr />
 
-      {/* Sunday Duty Section */}
+      {/* Sunday Section - Only shows if it's Sunday */}
       {summary?.isSunday && (
-        <section className="sunday-section">
+        <section className="sunday-section" style={{ marginTop: '20px' }}>
           <h2>📅 Sunday Duty Staff ({summary?.sundayDutyStaff?.length || 0})</h2>
-          <div className="stats-grid" style={{gridTemplateColumns: '1fr 1fr'}}>
-            {summary?.sundayDutyStaff?.length > 0 ? (
-              summary.sundayDutyStaff.map((staff) => (
-                <div key={staff._id} className="stat-card leave" style={{textAlign: 'left', padding: '15px'}}>
-                  <h3 style={{margin: 0}}>{staff.name}</h3>
-                  <p style={{margin: 0}}>{staff.staffId} | {staff.department}</p>
-                  <span style={{fontSize: '12px', fontWeight: 'bold'}}>ON DUTY</span>
-                </div>
-              ))
-            ) : (
-              <p>No staff assigned for Sunday duty today.</p>
-            )}
+          <div className="stats-grid">
+            {summary?.sundayDutyStaff?.map((staff) => (
+              <div key={staff._id} className="stat-card leave">
+                <h4 style={{ margin: 0 }}>{staff.name}</h4>
+                <p style={{ fontSize: '12px', color: '#666' }}>Department: {staff.department}</p>
+              </div>
+            ))}
           </div>
         </section>
       )}
 
-      {/* Action Buttons at the bottom */}
-      <div className="dashboard-footer">
+      {/* Main Navigation Buttons at Bottom */}
+      <footer className="dashboard-footer">
         <button className="nav-btn main" onClick={() => navigate("/attendance")}>
           Mark Attendance
         </button>
         <button className="nav-btn" onClick={() => navigate('/reports')}>
           View Reports
         </button>
-      </div>
+      </footer>
     </div>
-)};
+  );
+};
+
 export default Dashboard;

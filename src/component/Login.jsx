@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import "./Login.css";
+import './DashBoard.css';
 import api from "../api";
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-    const res = await api.post('/api/auth/login', { // Updated
+    const res = await api.post('/auth/login', { // Updated
       username: loginForm.username,
       password: loginForm.password
     });
@@ -37,7 +38,7 @@ const Login = () => {
       toast.success('Login successful!');
       
       // ✅ REDIRECT TO DASHBOARD
-      navigate('/');
+      navigate('/dashboard');
       
     } catch (error) {
       toast.error(error.response?.data?.message || 'Login failed');
@@ -69,7 +70,7 @@ const Login = () => {
     setLoading(true);
 
    try {
-    await api.post('/api/auth/register', { // Updated
+    await api.post('/auth/register', { // Updated
       username: registerForm.username,
       password: registerForm.password,
       role: registerForm.role
@@ -184,7 +185,7 @@ const Login = () => {
                 onChange={(e) => setRegisterForm({ ...registerForm, role: e.target.value })}
               >
                 <option value="staff">Staff</option>
-                <option value="admin">Admin</option>
+              
               </select>
             </div>
 

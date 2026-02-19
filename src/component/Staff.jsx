@@ -205,6 +205,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import "./Staff.css"
 import api from '../api'; // This now handles our Render URL automatically
 
 const Staff = () => {
@@ -224,7 +225,7 @@ const Staff = () => {
     // 1. FETCH ALL STAFF
     const fetchStaff = async () => {
         try {
-            const res = await api.get("/api/staff");
+            const res = await api.get("/staff");
             setStaff(res.data);
         } catch (error) {
             toast.error("Failed to fetch staff list from server");
@@ -247,11 +248,11 @@ const Staff = () => {
         try {
             if (editId) {
                 // UPDATE EXISTING
-                await api.put(`/api/staff/${editId}`, formData);
+                await api.put(`/staff/${editId}`, formData);
                 toast.success("Staff details updated!");
             } else {
                 // ADD NEW
-                await api.post("/api/staff", formData);
+                await api.post("/staff", formData);
                 toast.success("New staff added successfully!");
             }
             fetchStaff(); 
@@ -279,7 +280,7 @@ const Staff = () => {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this staff member?")) {
             try {
-                await api.delete(`/api/staff/${id}`);
+                await api.delete(`/staff/${id}`);
                 toast.success("Staff record deleted");
                 fetchStaff();
             } catch (error) {
@@ -291,7 +292,7 @@ const Staff = () => {
     // 6. TOGGLE SUNDAY DUTY
     const toggleSundayDuty = async (id) => {
         try {
-            await api.patch(`/api/staff/${id}/sundayDuty`);
+            await api.patch(`/staff/${id}/sundayDuty`);
             toast.success("Sunday Duty status changed");
             fetchStaff();
         } catch (error) {

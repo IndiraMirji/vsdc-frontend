@@ -243,6 +243,7 @@ import moment from "moment";
 import { FaEdit, FaLock, FaCalendarAlt } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import "./Attendance.css";
+import "./Dashboard.jsx"
 
 const Attendance = () => {
   const navigate = useNavigate();
@@ -334,7 +335,7 @@ const Attendance = () => {
               onChange={(e) => setSelectedDate(e.target.value)} 
             />
           </div>
-          <button className="btn-primary" onClick={() => navigate('/dasboard')}>Dashboard</button>
+          <button className="btn-primary" onClick={() => navigate('/dashboard')}>Dashboard</button>
         </div>
       </header>
 

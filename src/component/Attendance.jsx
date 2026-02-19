@@ -335,7 +335,9 @@ const Attendance = () => {
               onChange={(e) => setSelectedDate(e.target.value)} 
             />
           </div>
-          <button className="btn-primary" onClick={() => navigate('/dashboard')}>Dashboard</button>
+          <button className="btn-primary" onClick={() => navigate('/dashboard')}>
+  Dashboard
+</button>
         </div>
       </header>
 

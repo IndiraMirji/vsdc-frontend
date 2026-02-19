@@ -65,8 +65,8 @@ function App() {
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/reports" element={<Reports />} />
           
-          {/* Auth */}
-          <Route path="/login" element={<Login />} />
+      
+         
         </Routes>
       </BrowserRouter>
       

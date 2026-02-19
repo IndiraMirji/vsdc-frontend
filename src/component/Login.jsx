@@ -26,7 +26,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-    const res = await api.post('/auth/login', { // Updated
+    const res = await api.post('/api/auth/login', { // Updated
       username: loginForm.username,
       password: loginForm.password
     });
@@ -70,7 +70,7 @@ const Login = () => {
     setLoading(true);
 
    try {
-    await api.post('/auth/register', { // Updated
+    await api.post('/api/auth/register', { // Updated
       username: registerForm.username,
       password: registerForm.password,
       role: registerForm.role

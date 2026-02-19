@@ -22,7 +22,7 @@ const Dashboard = () => {
   const fetchTodaySummary = async () => {
     try {
       setLoading(true);
-      const response = await api.get("/attendance/today/summary");
+      const response = await api.get("/api/attendance/today/summary");
       setSummary(response.data);
     } catch (error) {
       console.error("Fetch failed", error);

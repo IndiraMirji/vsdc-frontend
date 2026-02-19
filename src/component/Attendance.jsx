@@ -262,14 +262,14 @@ const Attendance = () => {
 
   const fetchStaff = async () => {
     try {
-      const res = await api.get("/staff"); // Updated
+      const res = await api.get("/api/staff"); // Updated
       setStaff(res.data);
     } catch (error) { toast.error("Failed to fetch staff"); }
   };
 
   const fetchAttendance = async () => {
     try {
-      const response = await api.get(`/attendance/date/${selectedDate}`); // Updated
+      const response = await api.get(`/api/attendance/date/${selectedDate}`); // Updated
       setAttendance(response.data);
     } catch (error) { toast.error("Failed to fetch Attendance"); }
   };
@@ -280,10 +280,10 @@ const Attendance = () => {
     const payload = { staffId: selectedStaff, date: selectedDate, ...attendanceData };
     try {
       if (editingAttendance) {
-        await api.put(`/attendance/${editingAttendance._id}`, payload); // Updated
+        await api.put(`/api/attendance/${editingAttendance._id}`, payload); // Updated
         toast.success("Attendance updated successfully");
       } else {
-        await api.post(`/attendance`, payload); // Updated
+        await api.post(`/api/attendance`, payload); // Updated
         toast.success("Attendance marked successfully");
       }
       setEditingAttendance(null);

@@ -171,7 +171,7 @@ const Reports = () => {
   // ✅ Correctly defined fetchStaff
   const fetchStaff = async () => {
     try {
-      const res = await api.get("/staff");
+      const res = await api.get("/api/staff");
       setStaffList(res.data);
     } catch (err) {
       toast.error("Error loading staff list");
@@ -182,7 +182,7 @@ const Reports = () => {
   const fetchHistory = async () => {
     if (!selectedStaff) return toast.warning("Please select a staff member");
     try {
-      const res = await api.get(`/attendance/staff/${selectedStaff}`, { 
+      const res = await api.get(`/api/attendance/staff/${selectedStaff}`, { 
         params: { startDate, endDate } 
       });
       setHistory(res.data);
